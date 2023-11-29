@@ -99,10 +99,18 @@
       {% assign post_summary = post.description | default: post.excerpt %}
       {% if post_summary and post_summary != empty %}
         {% if site.feed.html_excerpts %}
-          <summary type="html"><![CDATA[{{ post_summary | strip | replace: cdata_end_token, cdata_end_token_escaped }}]]></summary>
+          {% assign post_summary = post_summary | strip %}
+          {% if site.feed.excerpt_link and site.feed.excerpt_link != empty %}
+            {% capture post_summary -%}
+              {{ post_summary }}<p><a href="{{ post.url | absolute_url }}">{{ site.feed.excerpt_link }}</a></p>
+            {%- endcapture %}
+          {% endif %}
         {% else %}
-          <summary type="html"><![CDATA[{{ post_summary | strip_html | normalize_whitespace |  replace: cdata_end_token, cdata_end_token_escaped }}]]></summary>
+          {% assign post_summary = post_summary | strip_html | normalize_whitespace %}
         {% endif %}
+
+        {% assign post_summary = post_summary | replace: cdata_end_token, cdata_end_token_escaped %}
+         <summary type="html"><![CDATA[{{ post_summary }}]]></summary>
       {% endif %}
 
       {% assign post_image = post.image.path | default: post.image %}

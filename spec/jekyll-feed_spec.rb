@@ -190,6 +190,23 @@ describe(JekyllFeed) do
       end
     end
 
+    context "with feed.html_excerpts and feed.excerpt_link set" do
+      let(:overrides) do 
+        {
+          "feed" => {
+            "html_excerpts" => true,
+            "excerpt_link" => "Read more",
+          },
+        }
+      end
+
+      it "appends a link to the full content to the summary" do
+        post = feed.items.detect { |item| item.title.content == "Pre" }
+        expect(post).to_not be_nil
+        expect(post.summary.content).to match %r!<p><a href="http://example\.org/2015/05/12/pre\.html">Read more</a></p>$!
+      end
+    end
+
     context "with site.lang set" do
       lang = "en_US"
       let(:overrides) { { "lang" => lang } }
