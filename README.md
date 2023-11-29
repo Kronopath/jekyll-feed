@@ -1,3 +1,7 @@
+# About this fork
+
+Fork of jekyll/jekyll-feed, used in https://www.kronopath.com/. Customized to that specific site's needs. No guarantee of suitability, stability, or maintenance for any other site.
+
 # Jekyll Feed plugin
 
 A Jekyll plugin to generate an Atom (RSS-like) feed of your Jekyll posts
