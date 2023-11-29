@@ -222,6 +222,30 @@ feed:
 
 This is useful in feeds where the excerpts have more complex content or formatting, such as when the post's `description` and `excerpt` front matter options are not set, causing Jekyll to [use the entire first paragraph of the post as the excerpt](https://jekyllrb.com/docs/posts/#post-excerpts).
 
+## Excerpt Link option
+
+When setting `html_excerpts` to `true`, you can optionally supply a string of text that will link back to the full post at the end of the excerpt:
+
+```yml
+feed:
+  html_excerpts: true
+  excerpt_link: "Continue reading"
+```
+
+For example, if your post's excerpt is:
+
+```html
+<p>My cool excerpt!</p>
+```
+
+This will make the excerpt in the feed show as:
+
+```html
+<p>My cool excerpt!</p><p><a href="https://example.com/my-cool-post/">Continue reading</a></p>
+```
+
+When `html_excerpts` is `false`, this option is ignored.
+
 ## Tags
 
 To automatically generate feeds for each tag you apply to your posts you can add a tags setting to your config:
